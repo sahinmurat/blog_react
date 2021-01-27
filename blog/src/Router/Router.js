@@ -10,7 +10,7 @@ import Main from "../pages/Main";
 function AppRouter() {
     return (
         <Router>
-            <Navbar />
+            {/* <Navbar /> */}
             <Switch>
                 <Route exact path='/signup' component={Signup} />
                 <Route exact path='/signin' component={Signin} />
