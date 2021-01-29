@@ -6,7 +6,7 @@ import Signin from "../pages/Signin";
 import Profile from "../pages/Profile";
 import Main from "../pages/Main";
 import Signup from "../pages/Signup"
-// import Blog from "../main/Blog";
+import Blog from "../main/Blog";
 // import Culture from "../pages/Culture";
 
 function AppRouter() {
@@ -17,7 +17,7 @@ function AppRouter() {
                 <Route exact path='/signup' component={Signup} />
                 <Route exact path='/signin' component={Signin} />
                 <Route exact path='/profile' component={Profile} />
-                {/* <Route exact path='/blog' component={Blog} /> */}
+                <Route exact path='/blog' component={Blog} />
                 {/* <Route exact path='/culture' component={Culture} /> */}
 
             </Switch>
