@@ -7,7 +7,8 @@ import Profile from "../pages/Profile";
 import Main from "../pages/Main";
 import Signup from "../pages/Signup"
 import Blog from "../main/Blog";
-// import Culture from "../pages/Culture";
+import Culture from "../pages/Culture";
+import PostCreate from "../pages/PostCreate";
 
 function AppRouter() {
     return (
@@ -18,7 +19,8 @@ function AppRouter() {
                 <Route exact path='/signin' component={Signin} />
                 <Route exact path='/profile' component={Profile} />
                 <Route exact path='/blog' component={Blog} />
-                {/* <Route exact path='/culture' component={Culture} /> */}
+                <Route exact path='/culture' component={Culture} />
+                <Route exact path='/create' component={PostCreate} />
 
             </Switch>
             <Footer />
