@@ -6,6 +6,8 @@ import Footer from '../components/Footer'
 import Signin from "../pages/Signin";
 import Profile from "../pages/Profile";
 import Main from "../pages/Main";
+// import Blog from "../main/Blog";
+// import Culture from "../pages/Culture";
 
 function AppRouter() {
     return (
@@ -15,7 +17,9 @@ function AppRouter() {
                 <Route exact path='/signup' component={Signup} />
                 <Route exact path='/signin' component={Signin} />
                 <Route exact path='/profile' component={Profile} />
-                <Route exact path='/' component={Main} />
+                {/* <Route exact path='/blog' component={Blog} /> */}
+                {/* <Route exact path='/culture' component={Culture} /> */}
+
             </Switch>
             <Footer />
         </Router>
