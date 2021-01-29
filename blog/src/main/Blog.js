@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 const sections = [
   { title: 'Technology', url: '#' },
   { title: 'Design', url: '#' },
-  { title: 'Culture', url: '#' },
+  { title: 'Culture', url: '/culture' },
   { title: 'Business', url: '#' },
   { title: 'Politics', url: '#' },
   { title: 'Opinion', url: '#' },
