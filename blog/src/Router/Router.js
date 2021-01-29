@@ -1,11 +1,11 @@
 import {BrowserRouter as Router , Switch, Route} from "react-router-dom";
 import React from 'react';
-import Signup from '../pages/Signup'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Signin from "../pages/Signin";
 import Profile from "../pages/Profile";
 import Main from "../pages/Main";
+import Signup from "../pages/Signup"
 // import Blog from "../main/Blog";
 // import Culture from "../pages/Culture";
 
