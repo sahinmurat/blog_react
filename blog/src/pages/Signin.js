@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
 function Copyright() {
   return (
@@ -59,8 +60,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Signin() {
   const classes = useStyles();
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [token, setToken] = useState('')
 
+  const handleSubmit = () =>{
+    axios.post('https://sahinblog.herokuapp.com/auth/login/', {username, email, password})
+    .then((e)=>setToken(e.data.key))
+    .catch((e)=> console.log(e))
+  }
+  console.log('b',token)
+  console.log(token)
   return (
+    
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
@@ -74,6 +87,19 @@ export default function Signin() {
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
+              onChange = {(e)=> setUsername(e.target.value)}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="User Name"
+              name="username"
+              autoComplete="username"
+              autoFocus
+            />
+            <TextField
+              onChange = {(e)=> setEmail(e.target.value)}
               variant="outlined"
               margin="normal"
               required
@@ -85,6 +111,7 @@ export default function Signin() {
               autoFocus
             />
             <TextField
+              onChange = {(e)=> setPassword(e.target.value)}
               variant="outlined"
               margin="normal"
               required
@@ -100,11 +127,12 @@ export default function Signin() {
               label="Remember me"
             />
             <Button
-              type="submit"
+              // type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick = {handleSubmit}
             >
               Sign In
             </Button>
