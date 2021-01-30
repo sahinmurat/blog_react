@@ -23,16 +23,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const sections = [
-  { title: 'Technology', url: '#' },
-  { title: 'Design', url: '#' },
-  { title: 'Culture', url: '/blog/culture' },
-  { title: 'Business', url: '#' },
-  { title: 'Politics', url: '#' },
-  { title: 'Opinion', url: '#' },
-  { title: 'Science', url: '#' },
-  { title: 'Health', url: '#' },
-  { title: 'Style', url: '#' },
-  { title: 'Travel', url: '#' },
+  { title: 'Technology', url: '/blog/technology' },
+  { title: 'Travel', url: '/blog/travel' },
+  { title: 'Social', url: '/blog/social' },
+  { title: 'Sport', url: '/blog/sport' },
+  { title: 'Politic', url: '/blog/politic' },
+  { title: 'Philosophy', url: '/blog/philosophy' },
+  { title: 'Literature', url: '/blog/literature' },
+  { title: 'Education', url: '/blog/education' },
+  { title: 'Economy', url: '/blog/economy' },
+  { title: 'Other', url: '/blog/other' },
 ];
 
 const mainFeaturedPost = {
