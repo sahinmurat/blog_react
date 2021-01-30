@@ -1,8 +1,10 @@
-import React,{useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 
 function Main() {
     const [res, setRes] = useState('')
+    const [culture, set] = useState('')
+    const literature = []
     console.log(res)
     useEffect( async () => {
        
@@ -15,14 +17,16 @@ function Main() {
             )
     }, [])
 
+    {res ? res.map((neu) =>(neu.category == 'Literature' ?  literature.push(neu) : null
+    )) : <p>Loading...</p>}
+
     return (
         
         <div>
-            {res ? <p>aa</p> : <p>bbb </p>}
-            {res ? res.map((neu) =>(
-                neu.category == 'Sport' ?  <img src = {neu.image} alt= 'photo' /> : <p> degil </p>
+            <br/>
+            {res ? res.map((neu) =>(neu.category == 'Literature' ?  <img src = {neu.image} alt= 'photo' /> : null
             )) : <p>Loading...</p>}
-    
+          <p> xx {JSON.stringify(literature)}  xx</p>
         </div>
     )
 }

@@ -251,6 +251,6 @@ export default function Signup() {
 // onclick handlesubmit
 // axios.post
 // // axios.getaxios.delete
-// localStorage.setItem('Authorization', token)
+localStorage.setItem('Authorization', token)
 // localStorage.setItem('Authorization', '')
 // localStorage.getItem('Authorization')
