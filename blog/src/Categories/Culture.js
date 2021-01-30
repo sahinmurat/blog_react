@@ -5,7 +5,7 @@ import  Card  from '../Card/Card'
 function Main() {
     const [res, setRes] = useState('')
     const [culture, set] = useState('')
-    const literature = [ ]
+    const literature = []
     console.log(res)
     useEffect( async () => {
        
@@ -17,19 +17,12 @@ function Main() {
                 (err)=> console.error(err)
             )
     }, [])
-
-    {res ? res.map((neu) =>(neu.category == 'Literature' ?  literature.push(neu) : null
-    )) : <p>Loading...</p>}
-    const slug = literature.map(({slug}) => slug)
-
     return (
         <div>
-            {/* <br/>
-            {res ? res.map((neu) =>(neu.category == 'Literature' ?  <img src = {neu.image} alt= 'photo' /> : null
-            )) : <p>Loading...</p>}
-          <p> {slug} </p> */}
-         { literature.map((a) =>  < Card item = {a} /> )}
-         
+             {res ? res.map((neu) =>(neu.category == 'Literature' 
+             ? literature.push(neu) : null
+             )) : <p>Loading...</p>}
+             { literature.map((a) =>  < Card item = {a} /> )}
         </div>
     )
 }

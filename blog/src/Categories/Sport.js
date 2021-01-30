@@ -1,11 +1,30 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import axios from 'axios'
+import  Card  from '../Card/Card'
 
-function Sport() {
+function Main() {
+    const [res, setRes] = useState('')
+    const [culture, set] = useState('')
+    const sport = []
+    console.log(res)
+    useEffect( async () => {
+       
+            const response = await axios.get('https://sahinblog.herokuapp.com/list')
+            .then(
+               (res)=>  setRes(res.data.results)
+            )
+            .catch(
+                (err)=> console.error(err)
+            )
+    }, [])
     return (
         <div>
-            sport
+             {res ? res.map((neu) =>(neu.category == 'Sport' 
+             ? sport.push(neu) : null
+             )) : <p>Loading...</p>}
+             { sport.map((a) =>  < Card item = {a} /> )}
         </div>
     )
 }
 
-export default Sport
+export default Main
