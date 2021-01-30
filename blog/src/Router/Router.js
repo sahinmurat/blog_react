@@ -38,7 +38,6 @@ function AppRouter() {
                 <Route exact path='/signin' component={Signin} />
                 <Route exact path='/signup' component={Signup} />
                 <Route exact path='/create' component={PostCreate} />
-
             </Switch>
             <Footer />
         </Router>
