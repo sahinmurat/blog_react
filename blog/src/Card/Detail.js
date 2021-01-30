@@ -25,8 +25,6 @@ function Detail() {
             <p> {detail.content} </p>
             <img src = {detail.image} alt= 'photo' />
             <p> {detail.author} </p>
-         
-            
         </div>
     )
 }

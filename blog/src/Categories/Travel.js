@@ -1,11 +1,30 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import axios from 'axios'
+import  Card  from '../Card/Card'
 
-function Travel() {
+function Main() {
+    const [res, setRes] = useState('')
+    const [culture, set] = useState('')
+    const travel = []
+    console.log(res)
+    useEffect( async () => {
+       
+            const response = await axios.get('https://sahinblog.herokuapp.com/list')
+            .then(
+               (res)=>  setRes(res.data.results)
+            )
+            .catch(
+                (err)=> console.error(err)
+            )
+    }, [])
     return (
         <div>
-            Travel
+             {res ? res.map((neu) =>(neu.category == 'Travel' 
+             ? travel.push(neu) : null
+             )) : <p>Loading...</p>}
+             { travel.map((a) =>  < Card item = {a} /> )}
         </div>
     )
 }
 
-export default Travel
+export default Main
