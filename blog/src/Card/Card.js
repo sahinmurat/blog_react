@@ -1,14 +1,19 @@
-import React from 'react'
-import {useHistory} from 'react-router-dom'
+import React,  {useContext} from 'react';
+import {AuthContext} from '../App'
+import {useHistory} from 'react-router-dom';
+import {StyledCardWrapper,StyledPostImage, StyledPostTitle} from './Card.style'
+
+
 
 function Card({item}) {
-    const history = useHistory();
-    console.log('a', item)
+   const history = useHistory();
+   const {auth} = useContext(AuthContext);
+   console.log(auth)
     return (
-        <div onClick = {() => history.push(`/detail/${item.slug}`)} >
-            <img src = {item.image} alt= 'photo' />
-            <p> {item.title} </p>
-        </div>
+        <StyledCardWrapper onClick = {() => history.push(`/detail/${item.slug}`)} >
+            <StyledPostImage src = {item.image} alt= 'photo' />
+            <StyledPostTitle> {item.title} </StyledPostTitle>
+        </StyledCardWrapper>
     )
 }
 

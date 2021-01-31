@@ -63,15 +63,13 @@ export default function Signin() {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [token, setToken] = useState('')
+  // const [token, setToken] = useState('')
 
   const handleSubmit = () =>{
     axios.post('https://sahinblog.herokuapp.com/auth/login/', {username, email, password})
-    .then((e)=>setToken(e.data.key))
+    .then((e)=>localStorage.setItem('Token', e.data.key))
     .catch((e)=> console.log(e))
   }
-  console.log('b',token)
-  console.log(token)
   return (
     
     <Grid container component="main" className={classes.root}>

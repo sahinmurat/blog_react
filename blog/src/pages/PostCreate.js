@@ -64,7 +64,7 @@ export default function PostCreate() {
   const [content, setcontent] = useState('')
   const [image, setimage] = useState('')
   const [category, setcategory] = useState('')
-  const token = 'cac3a18ef501580fa9e7aa0d82457e586b167a26'
+  const token = '72dc461d8a3131356385a4c9ace1871d72318832'
 
   const handleSubmit = () => {
     axios.post('https://sahinblog.herokuapp.com/create', {
