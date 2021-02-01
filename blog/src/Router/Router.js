@@ -1,5 +1,5 @@
-import {BrowserRouter as Router , Switch, Route} from "react-router-dom";
-import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React ,{useContext} from 'react';
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Signin from "../pages/Signin";
@@ -17,13 +17,16 @@ import Education from '../Categories/Education'
 import Philosophy from '../Categories/Philosophy'
 import Travel from '../Categories/Travel'
 import Other from '../Categories/Other'
+import { AuthContext } from '../App'
+
 
 function AppRouter() {
+    const {currentuser } = useContext(AuthContext);
     return (
         <Router>
             <Navbar />
             <Switch>
-                <Route exact path='/detail/:slug' component={Detail} />
+                <Route exact path='/detail/:slug'  component={currentuser ? Detail : Signin}/> 
                 <Route exact path='/blog' component={Blog} />
                 <Route exact path='/blog/sport' component={Sport} />
                 <Route exact path='/blog/politic' component={Politic} />
@@ -45,3 +48,6 @@ function AppRouter() {
 }
 
 export default AppRouter
+
+
+// #private root yapilacak.
