@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React, { useState, useContext,  useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../App'
 
 function Copyright() {
   return (
@@ -58,20 +60,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Signin() {
+export default function Signin(props) {
   const classes = useStyles();
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  // const [token, setToken] = useState('')
+  const history = useHistory();
 
-  const handleSubmit = () =>{
-    axios.post('https://sahinblog.herokuapp.com/auth/login/', {username, email, password})
-    .then((e)=>localStorage.setItem('Token', e.data.key))
-    .catch((e)=> console.log(e))
+
+  const { token, setToken, currentuser, setCurrentuser } = useContext(AuthContext);
+
+  const handleSubmit = () => {
+    axios.post('https://sahinblog.herokuapp.com/auth/login/', { username, email, password })
+      // .then((e)=>localStorage.setItem('Token', e.data.key))
+      .then((e) => {
+        // localStorage.setItem('Token', e.data.key);
+        setToken(e.data.key);
+        // setCurrentuser(e.data.key);
+        history.push('/blog');
+      })
+      // .then((e) => setToken(e.data.key))
+      .catch((e) => console.log(e))
+
   }
+  useEffect(() => {
+    axios.get('https://sahinblog.herokuapp.com/auth/user', {
+      headers: {
+        'Authorization': `Token ${token}`
+      }
+    }).then((res) => setCurrentuser(res.data)).catch((err) => console.log(err))
+  }, [token])
+  console.log('signin', currentuser,'signin', token)
   return (
-    
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
@@ -85,7 +105,7 @@ export default function Signin() {
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
-              onChange = {(e)=> setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
               variant="outlined"
               margin="normal"
               required
@@ -97,7 +117,7 @@ export default function Signin() {
               autoFocus
             />
             <TextField
-              onChange = {(e)=> setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               variant="outlined"
               margin="normal"
               required
@@ -109,7 +129,7 @@ export default function Signin() {
               autoFocus
             />
             <TextField
-              onChange = {(e)=> setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               variant="outlined"
               margin="normal"
               required
@@ -130,7 +150,7 @@ export default function Signin() {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick = {handleSubmit}
+              onClick={handleSubmit}
             >
               Sign In
             </Button>
@@ -153,6 +173,7 @@ export default function Signin() {
         </div>
       </Grid>
     </Grid>
+
   );
 }
 

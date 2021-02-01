@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,6 +8,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import { AuthContext } from '../App'
+import axios from 'axios'
+import { useHistory } from 'react-router-dom';
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,6 +27,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Navbar() {
+
+  const history = useHistory();
+  const handleLogout = () => {
+    localStorage.setItem('Token', '');
+    setToken('');
+    setCurrentuser('');
+    history.push('/blog');
+  }
+
+  const { token, setToken, currentuser, setCurrentuser } = useContext(AuthContext);
+  console.log('nav', currentuser)
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -40,49 +56,96 @@ export default function Navbar() {
   };
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Sahin's Blog
-          </Typography>
-          {auth && (
-            <div>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                  Display Name
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-              </Menu>
-            </div>
-          )}
-        </Toolbar>
-      </AppBar>
-    </div>
+    <>
+      { currentuser ? (<div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            </IconButton>
+            <Typography variant="h6" className={classes.title}>
+              Sahin's Blog
+            </Typography>
+            {auth && (
+              <div>
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                  {currentuser.username}
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={open}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
+              </div>
+            )}
+          </Toolbar>
+        </AppBar>
+      </div>) :
+        (<div className={classes.root}>
+          <AppBar position="static">
+            <Toolbar>
+              {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+              </IconButton> */}
+              <Typography variant="h6" className={classes.title}>
+                Sahin's Blog
+            </Typography>
+              {auth && (
+                <div>
+                  {/* <IconButton
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={handleMenu}
+                    color="inherit"
+                  >
+                    {currentuser.username}
+                    <AccountCircle />
+                  </IconButton>
+                  <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    open={open}
+                    onClose={handleClose}
+                  >
+                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                    <MenuItem onClick={handleClose}>My account</MenuItem>
+                  </Menu> */}
+                  <h3 onClick={() => history.push('/signin')}  >Login</h3>
+                </div>
+              )}
+            </Toolbar>
+          </AppBar>
+        </div>)}
+    </>
+
+
   );
 }
