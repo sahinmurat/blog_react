@@ -1,12 +1,14 @@
-import React , {useState, useEffect} from 'react'
+import React , {useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 import {useParams} from 'react-router-dom'
+import { AuthContext } from '../App'
 
 function Detail() {
+    const { token, setToken, currentuser, setCurrentuser } = useContext(AuthContext);
     const [detail, setDetail] = useState('')
     const {slug} = useParams();
     console.log('slug', slug)
-    const token = 'cac3a18ef501580fa9e7aa0d82457e586b167a26'
+    // const token = 'cac3a18ef501580fa9e7aa0d82457e586b167a26'
 
     useEffect( async () => {
        
