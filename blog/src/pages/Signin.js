@@ -15,6 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../App'
+import {useParams} from 'react-router-dom'
 
 function Copyright() {
   return (
@@ -61,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Signin(props) {
+  const {slug} = useParams();
   const classes = useStyles();
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -75,8 +77,8 @@ export default function Signin(props) {
       .then((e) => {
         setToken(e.data.key);
         localStorage.setItem('localToken', e?.data?.key);
-        
-        history.push('/blog');
+        slug ? console.log('slug', slug) :  console.log('yok')
+        slug ? history.push(`${slug}/`) : history.push('/blog')
       })
       .catch((e) => console.log(e))
   }
