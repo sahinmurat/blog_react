@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React , {useState, useContext} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import { AuthContext } from '../App'
 
 function Copyright() {
   return (
@@ -64,7 +65,9 @@ export default function PostCreate() {
   const [content, setcontent] = useState('')
   const [image, setimage] = useState('')
   const [category, setcategory] = useState('')
-  const token = '72dc461d8a3131356385a4c9ace1871d72318832'
+  const { token, setToken, currentuser, setCurrentuser } = useContext(AuthContext);
+  console.log('token', token, 'currentuser', currentuser)
+
 
   const handleSubmit = () => {
     axios.post('https://sahinblog.herokuapp.com/create', {
