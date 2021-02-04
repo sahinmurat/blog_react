@@ -1,9 +1,10 @@
 .wrapper {
     text-align: center;
     margin: 15px;
-    
 }
-
+.img{
+    border-radius: 10px;
+}
 .content {
     padding: 10px;
 }
