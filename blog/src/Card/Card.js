@@ -13,6 +13,7 @@ function Card({item}) {
         <StyledCardWrapper onClick = {() => history.push(`/detail/${item.slug}`)} >
             <StyledPostImage src = {item.image} alt= 'photo' />
             <StyledPostTitle> {item.title} </StyledPostTitle>
+            <StyledPostTitle> {item.like_count}  {item.comment_count}  {item.view_count} </StyledPostTitle>
         </StyledCardWrapper>
     )
 }

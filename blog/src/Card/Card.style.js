@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const StyledCardWrapper = styled.div`
-width: 15.375rem; 
-height: 20.5rem;
+width: 18rem; 
+height: 24rem;
 border: 0.0625rem solid rgba(0,0,0,0.1);
 border-radius: 5px;
 box-shadow: 0.1875rem 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
