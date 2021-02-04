@@ -40,7 +40,7 @@ function AppRouter() {
                 <Route exact path='/blog/other' component={Other} />
                 <Route exact path='/signin' component={Signin} />
                 <Route exact path='/signup' component={Signup} />
-                <Route exact path='/create' component={PostCreate} />
+                <Route exact path='/create' component={currentuser ? PostCreate : Signin}  />
             </Switch>
             <Footer />
         </Router>

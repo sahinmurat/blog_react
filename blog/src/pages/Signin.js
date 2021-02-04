@@ -1,4 +1,4 @@
-import React, { useState, useContext,  useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,6 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../App'
+import {useParams} from 'react-router-dom'
 
 function Copyright() {
   return (
@@ -61,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Signin(props) {
+  const {slug} = useParams();
   const classes = useStyles();
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -70,27 +72,19 @@ export default function Signin(props) {
 
   const { token, setToken, currentuser, setCurrentuser } = useContext(AuthContext);
 
-  const handleSubmit = () => {
-    axios.post('https://sahinblog.herokuapp.com/auth/login/', { username, email, password })
-      // .then((e)=>localStorage.setItem('Token', e.data.key))
+  const handleSubmit = async () => {
+   await axios.post('https://sahinblog.herokuapp.com/auth/login/', { username, email, password })
       .then((e) => {
-        // localStorage.setItem('Token', e.data.key);
         setToken(e.data.key);
-        // setCurrentuser(e.data.key);
-        history.push('/blog');
+        localStorage.setItem('localToken', e?.data?.key);
+        slug ? console.log('slug', slug) :  console.log('yok')
+        slug ? history.push(`${slug}/`) : history.push('/blog')
       })
-      // .then((e) => setToken(e.data.key))
       .catch((e) => console.log(e))
-
   }
-  useEffect(() => {
-    axios.get('https://sahinblog.herokuapp.com/auth/user', {
-      headers: {
-        'Authorization': `Token ${token}`
-      }
-    }).then((res) => setCurrentuser(res.data)).catch((err) => console.log(err))
-  }, [token])
-  console.log('signin', currentuser,'signin', token)
+
+  console.log('signincurrentuser', currentuser, 'signintoken', token)
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />

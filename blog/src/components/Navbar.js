@@ -28,16 +28,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar() {
 
+  const { token, setToken, currentuser, setCurrentuser } = useContext(AuthContext);
   const history = useHistory();
   const handleLogout = () => {
-    localStorage.setItem('Token', '');
-    setToken('');
-    setCurrentuser('');
+    localStorage.removeItem('localToken');
+    // localStorage.setItem('localToken','');
+    setToken(null);
+    setCurrentuser(null);
     history.push('/blog');
   }
 
-  const { token, setToken, currentuser, setCurrentuser } = useContext(AuthContext);
-  console.log('nav', currentuser)
+  console.log('currentusser navbar ', currentuser)
+
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -57,7 +59,7 @@ export default function Navbar() {
 
   return (
     <>
-      { currentuser ? (<div className={classes.root}>
+      {token ? (<div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
@@ -74,7 +76,7 @@ export default function Navbar() {
                   onClick={handleMenu}
                   color="inherit"
                 >
-                  {currentuser.username}
+                  {currentuser?.username}
                   <AccountCircle />
                 </IconButton>
                 <Menu
