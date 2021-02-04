@@ -16,6 +16,7 @@ transition: 2s;
  &:hover {
      transform: scale(1.2,1);
      box-shadow: 3px 2px 1px aqua;
+     cursor:pointer
  }
 `
 
@@ -29,5 +30,6 @@ export const StyledPostImage = styled.img`
   border-radius:10px`
 
 export const StyledPostTitle = styled.h4`
- color: brown
+ color: brown;
+ text-align:center
 `

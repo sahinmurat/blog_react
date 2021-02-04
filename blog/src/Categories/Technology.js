@@ -17,8 +17,6 @@ function Main() {
                 (err) => console.error(err)
             )
     }, [])
-    // technology.push(neu)
-    console.log(technology)
     return (
         <div className = 'cardWrapper'>
             {res ? res.map((neu) => (neu.category === 'Technology' ? technology.push(neu) : null
