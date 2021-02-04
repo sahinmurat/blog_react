@@ -1,7 +1,9 @@
-import React , {useState, useEffect, useContext} from 'react'
+import React,  {useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 import {useParams} from 'react-router-dom'
 import { AuthContext } from '../App'
+import './Detail.style.css'
+
 
 function Detail() {
     const { token, setToken, currentuser, setCurrentuser } = useContext(AuthContext);
@@ -22,11 +24,12 @@ function Detail() {
 }, [])
     console.log('detail', detail)
     return (
-        <div>
-            <p><b> {detail.title} </b></p>
-            <p> {detail.content} </p>
+        <div className= 'wrapper'>
+            <h2> {detail.title} </h2>
+            <p className='content' > {detail.content} </p>
             <img src = {detail.image} alt= 'photo' />
             <p> {detail.author} </p>
+            {/* // <FcLike />{item.like_count} < FaRegComments style={{paddingLeft:10}}/> {item.comment_count} < FaRegEye style={{paddingLeft:10}}/>  {item.view_count} */}
         </div>
     )
 }
