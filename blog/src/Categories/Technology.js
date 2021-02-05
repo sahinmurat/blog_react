@@ -3,6 +3,7 @@ import axios from 'axios'
 import Card from '../Card/Card'
 import './CategoryStyle.css'
 
+
 function Main() {
     const [res, setRes] = useState('')
     const technology = []

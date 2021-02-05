@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import  Card  from '../Card/Card'
+import './CategoryStyle.css'
 
 function Main() {
     const [res, setRes] = useState('')
@@ -18,7 +19,7 @@ function Main() {
             )
     }, [])
     return (
-        <div>
+        <div className = 'cardWrapper' >
              {res ? res.map((neu) =>(neu.category == 'Education' 
              ? education.push(neu) : null
              )) : <p>Loading...</p>}
