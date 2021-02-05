@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import  Card  from '../Card/Card'
+import './CategoryStyle.css'
 
 
 function Main() {
@@ -20,19 +21,19 @@ function Main() {
     useEffect(() => {
         axios.get('https://sahinblog.herokuapp.com/list').
           then((res) => {
-           console.log(res.data);
+           setRes(res.data.results);
           }).
           catch((err) => console.log(err))
       }, [])
 
-    console.log('res', res)
+    console.log(travel)
     return (
-        <div >
+        <div className = 'cardWrapper'  >
              {res ? res.map((neu) =>(neu.category == 'Travel' 
              ? travel.push(neu) : null
              )) : <p>Loading...</p>}
              { travel.map((a) =>  < Card item = {a} /> )}
-             <p>{JSON.stringify(travel)}</p>
+       
         </div>
     )
 }

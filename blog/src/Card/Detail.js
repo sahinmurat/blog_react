@@ -1,6 +1,6 @@
-import React,  {useState, useEffect, useContext} from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
-import {useParams} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { AuthContext } from '../App'
 import './Detail.style.css'
 import Avatar from '@material-ui/core/Avatar';
@@ -20,23 +20,23 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 function Detail() {
-    const { token, setToken, currentuser, setCurrentuser } = useContext(AuthContext);
-    const [detail, setDetail] = useState('')
-    const {slug} = useParams();
-    console.log('slug', slug)
-   
-    useEffect( async () => {
-       
-        axios.get(`https://sahinblog.herokuapp.com/${slug}/detail-comment`,  {
-                   headers:{
-                     'Authorization':`Token ${token}`
-                   }
-                 }
-          ).then((a)=> setDetail(a.data))
-          .catch((a)=> console.log(a))
-}, [])
-   
-const useStyles = makeStyles((theme) => ({
+  const { token, setToken, currentuser, setCurrentuser } = useContext(AuthContext);
+  const [detail, setDetail] = useState('')
+  const { slug } = useParams();
+  console.log('slug', slug)
+
+  useEffect(async () => {
+
+    axios.get(`https://sahinblog.herokuapp.com/${slug}/detail-comment`, {
+      headers: {
+        'Authorization': `Token ${token}`
+      }
+    }
+    ).then((a) => setDetail(a.data))
+      .catch((a) => console.log(a))
+  }, [])
+
+  const useStyles = makeStyles((theme) => ({
     root: {
       height: '65vh',
     },
@@ -72,73 +72,73 @@ const useStyles = makeStyles((theme) => ({
   const [content, setcontent] = useState('')
   const [image, setimage] = useState('')
   const [category, setcategory] = useState('')
-  
+
 
   const handleSubmit = () => {
     axios.post('https://sahinblog.herokuapp.com/create', {
-      title:title , content:content, image:image, category:category
+      title: title, content: content, image: image, category: category
     }, {
-             headers:{
-               'Authorization':`Token ${token}`
-             }
-           }
-    ).then((a)=> console.log(a))
-    .catch((a)=> console.log(a))
+      headers: {
+        'Authorization': `Token ${token}`
+      }
+    }
+    ).then((a) => console.log(a))
+      .catch((a) => console.log(a))
   }
-    return (
-        <div className= 'wrapper'>
-            <h2> {detail.title} </h2>
-            <p className='content' > {detail.content} </p>
-            <img src = {detail.image} alt= 'photo' />
-            <p> {detail.author} </p>
+  return (
+    <div className='wrapper'>
+      <h2> {detail.title} </h2>
+      <p className='content' > {detail.content} </p>
+      <img src={detail.image} alt='photo' />
+      <p> {detail.author} </p>
 
-            <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-        
-          <Typography component="h1" variant="h5">
-            Create New Comment
+      <Grid container component="main" className={classes.root}>
+        <CssBaseline />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <div className={classes.paper}>
+
+            <Typography component="h1" variant="h5">
+              Create New Comment
           </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              onChange = {(e)=> settitle(e.target.value)}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="title"
-              label="Title"
-              name="title"
-              autoComplete="title"
-              autoFocus
-            />
-            <TextField
-              onChange = {(e)=> setcontent(e.target.value)}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="content"
-              label="Content"
-              name="content"
-              autoComplete="content"
-              autoFocus
-            />
-            <TextField
-              onChange = {(e)=> setimage(e.target.value)}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="image"
-              label="Image"
-              type="url"
-              id="image"
-              autoComplete="current-image"
-            />
-             <TextField
-                 onChange = {(e)=> setcategory(e.target.value)}
+            <form className={classes.form} noValidate>
+              <TextField
+                onChange={(e) => settitle(e.target.value)}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="title"
+                label="Title"
+                name="title"
+                autoComplete="title"
+                autoFocus
+              />
+              <TextField
+                onChange={(e) => setcontent(e.target.value)}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="content"
+                label="Content"
+                name="content"
+                autoComplete="content"
+                autoFocus
+              />
+              <TextField
+                onChange={(e) => setimage(e.target.value)}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="image"
+                label="Image"
+                type="url"
+                id="image"
+                autoComplete="current-image"
+              />
+              <TextField
+                onChange={(e) => setcategory(e.target.value)}
                 variant="outlined"
                 required
                 fullWidth
@@ -148,23 +148,23 @@ const useStyles = makeStyles((theme) => ({
                 // id="image"
                 autoComplete="current-image"
               />
-         
-            <Button
-              // type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick = {handleSubmit}
-            >
-              Send Your Comment
+
+              <Button
+                // type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={handleSubmit}
+              >
+                Send Your Comment
             </Button>
-                       </form>
-        </div>
+            </form>
+          </div>
+        </Grid>
       </Grid>
-    </Grid>
-        </div>
-    )
+    </div>
+  )
 }
 
 export default Detail

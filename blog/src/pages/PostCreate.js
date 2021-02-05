@@ -1,4 +1,4 @@
-import React , {useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -65,23 +65,24 @@ export default function PostCreate() {
   const [content, setcontent] = useState('')
   const [image, setimage] = useState('')
   const [category, setcategory] = useState('')
+  const [status, setStatus] = useState('')
   const { token, setToken, currentuser, setCurrentuser } = useContext(AuthContext);
   console.log('token', token, 'currentuser', currentuser)
 
 
   const handleSubmit = () => {
     axios.post('https://sahinblog.herokuapp.com/create', {
-      title:title , content:content, image:image, category:category
+      title: title, content: content, image: image, category: category, status:status
     }, {
-             headers:{
-               'Authorization':`Token ${token}`
-             }
-           }
-    ).then((a)=> console.log(a))
-    .catch((a)=> console.log(a))
+      headers: {
+        'Authorization': `Token ${token}`
+      }
+    }
+    ).then((a) => console.log(a))
+      .catch((a) => console.log(a))
   }
   return (
-    
+
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
@@ -95,7 +96,7 @@ export default function PostCreate() {
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
-              onChange = {(e)=> settitle(e.target.value)}
+              onChange={(e) => settitle(e.target.value)}
               variant="outlined"
               margin="normal"
               required
@@ -107,7 +108,7 @@ export default function PostCreate() {
               autoFocus
             />
             <TextField
-              onChange = {(e)=> setcontent(e.target.value)}
+              onChange={(e) => setcontent(e.target.value)}
               variant="outlined"
               margin="normal"
               required
@@ -119,7 +120,7 @@ export default function PostCreate() {
               autoFocus
             />
             <TextField
-              onChange = {(e)=> setimage(e.target.value)}
+              onChange={(e) => setimage(e.target.value)}
               variant="outlined"
               margin="normal"
               required
@@ -130,31 +131,40 @@ export default function PostCreate() {
               id="image"
               autoComplete="current-image"
             />
-             <TextField
-                 onChange = {(e)=> setcategory(e.target.value)}
-                variant="outlined"
-                required
-                fullWidth
-                name="category"
-                label="Category"
-                type="dropdown"
-                // id="image"
-                autoComplete="current-image"
-              />
-         
+            <TextField
+              onChange={(e) => setcategory(e.target.value)}
+              variant="outlined"
+              required
+              fullWidth
+              name="category"
+              label="Category"
+              type="dropdown"
+              autoComplete="current-image"
+            />
+            <TextField
+              onChange={(e) => setStatus(e.target.value)}
+              variant="outlined"
+              required
+              fullWidth
+              name="status"
+              label="Status"
+              type="dropdown"
+              autoComplete="current-image"
+            />
+
             <Button
               // type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick = {handleSubmit}
+              onClick={handleSubmit}
             >
               Send Your Post
             </Button>
-             <Grid container justify="flex-end">
-           
-          </Grid>
+            <Grid container justify="flex-end">
+
+            </Grid>
             <Box mt={5}>
               <Copyright />
             </Box>
