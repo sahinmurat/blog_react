@@ -38,25 +38,13 @@ function Detail() {
 
   const useStyles = makeStyles((theme) => ({
     root: {
-      height: '65vh',
-    },
-    image: {
-      backgroundImage: 'url(https://source.unsplash.com/random)',
-      backgroundRepeat: 'no-repeat',
-      backgroundColor:
-        theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
+      height: '25vh',
     },
     paper: {
       margin: theme.spacing(8, 4),
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-    },
-    avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
     },
     form: {
       width: '100%', // Fix IE 11 issue.
@@ -75,8 +63,8 @@ function Detail() {
 
 
   const handleSubmit = () => {
-    axios.post('https://sahinblog.herokuapp.com/create', {
-      title: title, content: content, image: image, category: category
+    axios.post(`https://sahinblog.herokuapp.com/${slug}/detail-comment`, {
+       content: content
     }, {
       headers: {
         'Authorization': `Token ${token}`
@@ -101,18 +89,7 @@ function Detail() {
               Create New Comment
           </Typography>
             <form className={classes.form} noValidate>
-              <TextField
-                onChange={(e) => settitle(e.target.value)}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="title"
-                label="Title"
-                name="title"
-                autoComplete="title"
-                autoFocus
-              />
+
               <TextField
                 onChange={(e) => setcontent(e.target.value)}
                 variant="outlined"
@@ -120,35 +97,11 @@ function Detail() {
                 required
                 fullWidth
                 id="content"
-                label="Content"
+                label="Your Comment"
                 name="content"
                 autoComplete="content"
                 autoFocus
               />
-              <TextField
-                onChange={(e) => setimage(e.target.value)}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="image"
-                label="Image"
-                type="url"
-                id="image"
-                autoComplete="current-image"
-              />
-              <TextField
-                onChange={(e) => setcategory(e.target.value)}
-                variant="outlined"
-                required
-                fullWidth
-                name="category"
-                label="Category"
-                type="dropdown"
-                // id="image"
-                autoComplete="current-image"
-              />
-
               <Button
                 // type="submit"
                 fullWidth
