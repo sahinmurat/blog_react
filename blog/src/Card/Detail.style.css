@@ -3,7 +3,15 @@
     margin: 15px;
     
 }
+.header{
+    color: rgb(9, 0, 92);
+}
 
 .content {
     padding: 10px;
+    font-size: large;
+}
+
+.image{
+    border-radius: 20px;
 }
