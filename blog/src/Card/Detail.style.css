@@ -9,9 +9,24 @@
 
 .content {
     padding: 10px;
+    margin-left: 15%;
+    margin-right: 15%;
+    border: 1px solid rgb(3, 3, 82);
+    border-radius: 10px;
     font-size: large;
+    box-shadow: 2px 2px 4px rgb(134, 134, 224);
 }
 
 .image{
     border-radius: 20px;
+    box-shadow: 2px 2px 4px rgb(134, 134, 224);
+}
+.author{
+    font-size: large;
+}
+.like{
+    font-size: large;
+}
+.comment{
+    font-size: large;
 }
