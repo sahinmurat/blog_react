@@ -20,7 +20,7 @@ function Detail() {
     }
     ).then((a) => setDetail(a.data))
       .catch((a) => console.log(a))
-  }, [])
+  }, [detail])
 
   const [title, settitle] = useState('')
   const [content, setcontent] = useState('')
@@ -48,7 +48,10 @@ function Detail() {
         'Authorization': `Token ${token}`
       }
     }
-    ).then((a) => console.log(a.data))
+    ).then((a) => {
+      console.log(a.data)
+     
+    })
       .catch((a) => console.log(a))
   }
   const com = detail.comments
@@ -58,9 +61,10 @@ function Detail() {
       <h2 className='header' > {detail.title} </h2>
       <img className='image' src={detail.image} alt='photo' />
       <p className='content' > {detail.content} </p>
-      <p className='author' > {detail.author} </p>
-      {detail.has_liked == true ? <FcLike onClick={likeHandle} /> : <FaRegHeart onClick={likeHandle} />}
-      {com?.map(({content, author})=><p> {content} , {author} </p>)}
+      <p className='author' ><b>  Author of this Post: </b> {detail.author} </p>
+      <p className='like' onClick={likeHandle} > I like this Post <FcLike/> </p> 
+      {/* //</div>{detail.has_liked == true ? <FcLike onClick={likeHandle} /> : <FaRegHeart onClick={likeHandle} />}</p> */}
+      {com?.map(({content, author})=><p className='comment'> {content} ,<b> by {author}</b> </p>)}
       <form className='form' noValidate>
         <input
           onChange={(e) => setcontent(e.target.value)}
