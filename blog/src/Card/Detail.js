@@ -5,12 +5,34 @@ import { AuthContext } from '../App'
 import './Detail.style.css'
 import { FcLike } from "react-icons/fc"
 import { FaRegHeart } from "react-icons/fa"
+import { useHistory } from 'react-router-dom';
+
+import { makeStyles } from '@material-ui/core/styles';
+import { TextField, Button, Icon } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '50%',
+    },
+  },
+}));
+
+
+
 
 function Detail() {
+  const classes = useStyles();
   const { token, setToken, currentuser, setCurrentuser } = useContext(AuthContext);
   const [detail, setDetail] = useState('')
   const { slug } = useParams();
-  console.log('slug', slug)
+  const [title, settitle] = useState('')
+  const [content, setcontent] = useState('')
+  const [image, setimage] = useState('')
+  const [category, setcategory] = useState('')
+  const [force, setForce] = useState(true)
+  const history = useHistory();
 
   useEffect(async () => {
     axios.get(`https://sahinblog.herokuapp.com/${slug}/detail-comment`, {
@@ -20,12 +42,8 @@ function Detail() {
     }
     ).then((a) => setDetail(a.data))
       .catch((a) => console.log(a))
-  }, [detail])
-
-  const [title, settitle] = useState('')
-  const [content, setcontent] = useState('')
-  const [image, setimage] = useState('')
-  const [category, setcategory] = useState('')
+  }, [force])
+  console.log('detail', detail)
 
   const handleSubmit = () => {
     axios.post(`https://sahinblog.herokuapp.com/${slug}/detail-comment`, {
@@ -35,7 +53,10 @@ function Detail() {
         'Authorization': `Token ${token}`
       }
     }
-    ).then((a) => console.log(a))
+    ).then((a) => {
+      setForce(s=>!s)
+      console.log(a)
+    })
       .catch((a) => console.log(a))
   }
 
@@ -50,7 +71,24 @@ function Detail() {
     }
     ).then((a) => {
       console.log(a.data)
-     
+      setForce(s => !s)
+
+    })
+      .catch((a) => console.log(a))
+  }
+
+  const deletePost = () => {
+    axios.delete(`https://sahinblog.herokuapp.com/${slug}/update`,
+      {
+        headers: {
+          'Authorization': `Token ${token}`
+        }
+      }
+    ).then((a) => {
+      console.log(a)
+      history.push(`/blog/${detail.category}`)
+
+
     })
       .catch((a) => console.log(a))
   }
@@ -62,10 +100,25 @@ function Detail() {
       <img className='image' src={detail.image} alt='photo' />
       <p className='content' > {detail.content} </p>
       <p className='author' ><b>  Author of this Post: </b> {detail.author} </p>
-      <p className='like' onClick={likeHandle} > I like this Post <FcLike/> </p> 
-      {/* //</div>{detail.has_liked == true ? <FcLike onClick={likeHandle} /> : <FaRegHeart onClick={likeHandle} />}</p> */}
-      {com?.map(({content, author})=><p className='comment'> {content} ,<b> by {author}</b> </p>)}
-      <form className='form' noValidate>
+      {detail.has_liked == true ? <p className='like' onClick={likeHandle} style={{ cursor: 'pointer' }} > I like this Post <FcLike /> </p> : <p className='like' onClick={likeHandle} style={{ cursor: 'pointer' }} > I like this Post <FaRegHeart /> </p>}
+      {com?.map(({ content, author }) => <p className='comment'> {content} ,<b> by {author}</b> </p>)}
+
+      <form className={classes.root} noValidate autoComplete="off">
+        <TextField id="outlined-textarea" label="Outlined" variant="outlined" rows={5} multiline onChange={(e) => setcontent(e.target.value)} />
+        <Button  onClick={handleSubmit} variant="contained" color="primary">
+          Primary
+        </Button>
+      </form>
+      <button
+        onClick={deletePost}
+      > Delete This Post </button>
+    </div>
+  )
+}
+
+export default Detail
+
+{/* <form className='form' noValidate>
         <input
           onChange={(e) => setcontent(e.target.value)}
           variant="outlined"
@@ -86,10 +139,5 @@ function Detail() {
           onClick={handleSubmit}
         >
           Send Your Comment
-            </button>
-      </form>
-    </div>
-  )
-}
-
-export default Detail
+        </button>
+      </form> */}

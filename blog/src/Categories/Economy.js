@@ -20,8 +20,7 @@ function Main() {
     }, [])
     return (
         <div className = 'cardWrapper' >
-             {res ? res.map((neu) =>(neu.category == 'Economy' 
-             ? economy.push(neu) : null
+             {res ? res.map((neu) =>(neu.category == 'Economy'  ? economy.push(neu) : null
              )) : <p>Loading...</p>}
              { economy.map((a) =>  < Card item = {a} /> )}
         </div>
