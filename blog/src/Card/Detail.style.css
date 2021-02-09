@@ -29,4 +29,5 @@
 }
 .comment{
     font-size: large;
+    border: 1px dotted rgb(22, 22, 179);
 }
