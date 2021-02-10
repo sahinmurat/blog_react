@@ -54,7 +54,7 @@ function Detail() {
       }
     }
     ).then((a) => {
-      setForce(s=>!s)
+      setForce(s => !s)
       console.log(a)
     })
       .catch((a) => console.log(a))
@@ -105,13 +105,13 @@ function Detail() {
 
       <form className={classes.root} noValidate autoComplete="off">
         <TextField id="outlined-textarea" label="Outlined" variant="outlined" rows={5} multiline onChange={(e) => setcontent(e.target.value)} />
-        <Button  onClick={handleSubmit} variant="contained" color="primary">
+        <Button onClick={handleSubmit} variant="contained" color="primary">
           Primary
         </Button>
+        <Button onClick={deletePost} variant="contained" color="secondary">
+          Delete This Post
+      </Button>
       </form>
-      <button
-        onClick={deletePost}
-      > Delete This Post </button>
     </div>
   )
 }

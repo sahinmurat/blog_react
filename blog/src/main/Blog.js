@@ -108,7 +108,7 @@ export default function Blog() {
     description:randomItem?.content.substring(0,125) + '...',
     image:randomItem?.image,
     imageText: 'main image description',
-    linkText: 'Any Other Post…',
+    linkText: 'Read More…',
     slug: randomItem?.slug
   };
 

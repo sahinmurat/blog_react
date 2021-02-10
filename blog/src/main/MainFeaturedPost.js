@@ -59,7 +59,7 @@ function MainFeaturedPost(props) {
             <Typography variant="h5" color="inherit" paragraph>
               {post.description}
             </Typography>
-            <p variant="subtitle1" onClick={() => history.push(`/detail/${slug}`)} >
+            <p style={{cursor:'pointer'}} variant="subtitle1" onClick={() => history.push(`/detail/${slug}`)} >
               {post.linkText}
             </p>
           </div>
