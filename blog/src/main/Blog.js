@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -15,6 +15,7 @@ import Footer from './Footer';
 import post1 from './blog-post.1.md';
 import post2 from './blog-post.2.md';
 import post3 from './blog-post.3.md';
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
@@ -34,15 +35,6 @@ const sections = [
   { title: 'Economy', url: '/blog/economy' },
   { title: 'Other', url: '/blog/other' },
 ];
-
-const mainFeaturedPost = {
-  title: 'Title of a longer featured blog post',
-  description:
-    "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-  image: 'https://source.unsplash.com/random',
-  imageText: 'main image description',
-  linkText: 'Continue reading…',
-};
 
 const featuredPosts = [
   {
@@ -89,14 +81,42 @@ const sidebar = {
   ],
 };
 
+// var myArray = [
+//   "Apples",
+//   "Bananas",
+//   "Pears"
+// ];
+
+// var randomItem = myArray[Math.floor(Math.random()*myArray.length)];
+
+// document.body.innerHTML = randomItem;
+
 export default function Blog() {
   const classes = useStyles();
+  const [list, setList] = useState('')
+
+  useEffect(async ()=>{
+    const respond = await axios.get('https://sahinblog.herokuapp.com/list')
+    setList(respond.data.results)
+  }, [])
+  
+  var randomItem =list ?  list[Math.floor(Math.random()*list.length)] : console.log('no item')
+  console.log('randomItem', randomItem)
+
+  const mainFeaturedPost = {
+    title: randomItem?.title,
+    description:randomItem?.content.substring(0,125) + '...',
+    image:randomItem?.image,
+    imageText: 'main image description',
+    linkText: 'Any Other Post…',
+    slug: randomItem?.slug
+  };
 
   return (
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="Blog" sections={sections} />
+        <Header title="The Topics" sections={sections} />
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>
@@ -104,6 +124,7 @@ export default function Blog() {
               <FeaturedPost key={post.title} post={post} />
             ))}
           </Grid>
+          {/* The Section of thr two pictures */}
           <Grid container spacing={5} className={classes.mainGrid}>
             <Main title="From the firehose" posts={posts} />
             <Sidebar

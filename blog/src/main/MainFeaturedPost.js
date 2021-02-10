@@ -1,10 +1,12 @@
-import * as React from 'react';
+import React from 'react';
+import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
+
 
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
@@ -38,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
 function MainFeaturedPost(props) {
   const classes = useStyles();
   const { post } = props;
-
+  const slug = post.slug;
+  const history = useHistory();
   return (
     <Paper
       className={classes.mainFeaturedPost}
@@ -56,9 +59,9 @@ function MainFeaturedPost(props) {
             <Typography variant="h5" color="inherit" paragraph>
               {post.description}
             </Typography>
-            <Link variant="subtitle1" href="#">
+            <p variant="subtitle1" onClick={() => history.push(`/detail/${slug}`)} >
               {post.linkText}
-            </Link>
+            </p>
           </div>
         </Grid>
       </Grid>
