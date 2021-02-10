@@ -23,6 +23,7 @@
 // export default Card
 
 import React, { useContext } from 'react';
+import { StyledCardWrapper, StyledPostImage, StyledPostTitle } from './Card.style'
 import { FaRegEye } from 'react-icons/fa'
 import { FaRegComments } from 'react-icons/fa'
 import { FcLike } from "react-icons/fc"
@@ -47,9 +48,9 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        margin:'10px',
+        margin: '10px',
         maxWidth: 345,
-        cursor:'pointer',
+        cursor: 'pointer',
         borderRadius: '25px'
     },
     media: {
@@ -69,6 +70,9 @@ const useStyles = makeStyles((theme) => ({
     avatar: {
         backgroundColor: red[500],
     },
+    icons: {
+        margin: 'auto'
+    }
 }));
 
 export default function RecipeReviewCard({ item }) {
@@ -87,12 +91,12 @@ export default function RecipeReviewCard({ item }) {
     };
 
     return (
-        <Card className={classes.root} onClick = {() => history.push(`/detail/${item.slug}`)}>
+        <Card className={classes.root} onClick={() => history.push(`/detail/${item.slug}`)}>
             <CardHeader
                 avatar={
                     <Avatar aria-label="recipe" className={classes.avatar}>
                         {avatar}
-          </Avatar>
+                    </Avatar>
                 }
                 action={
                     <IconButton aria-label="settings">
@@ -109,14 +113,12 @@ export default function RecipeReviewCard({ item }) {
             />
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    This impressive paella is a perfect party dish and a fun meal to cook together with your
-                    guests. Add 1 cup of frozen peas along with the mussels, if you like.
+                    {item.content.substring(0, 155)}  ...
+
         </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                </IconButton>
+                <StyledPostTitle className={classes.icons}> <FcLike />{item.like_count} < FaRegComments style={{ paddingLeft: 10 }} /> {item.comment_count} < FaRegEye style={{ paddingLeft: 10 }} />  {item.view_count} </StyledPostTitle>
             </CardActions>
         </Card>
     );
