@@ -51,7 +51,8 @@ const useStyles = makeStyles((theme) => ({
         margin: '10px',
         maxWidth: 345,
         cursor: 'pointer',
-        borderRadius: '25px'
+        borderRadius: '25px',
+        height: '55vh'
     },
     media: {
         height: 0,
@@ -68,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
         transform: 'rotate(180deg)',
     },
     avatar: {
-        backgroundColor: red[500],
+        backgroundColor: blue[500],
     },
     icons: {
         margin: 'auto'
