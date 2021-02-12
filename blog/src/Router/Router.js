@@ -28,6 +28,7 @@ function AppRouter() {
             <Switch>
                 <Route exact path='/detail/:slug'  component={currentuser ? Detail : Signin}/> 
                 <Route exact path='/blog' component={Blog} />
+                {/* <Route exact path='/blog/:category' component={Sport} /> */}
                 <Route exact path='/blog/sport' component={Sport} />
                 <Route exact path='/blog/politic' component={Politic} />
                 <Route exact path='/blog/social' component={Social} />
