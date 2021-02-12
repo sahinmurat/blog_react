@@ -40,7 +40,7 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
+import { blue, red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -51,7 +51,8 @@ const useStyles = makeStyles((theme) => ({
         margin: '10px',
         maxWidth: 345,
         cursor: 'pointer',
-        borderRadius: '25px'
+        borderRadius: '25px',
+        height: '55vh'
     },
     media: {
         height: 0,
@@ -63,12 +64,13 @@ const useStyles = makeStyles((theme) => ({
         transition: theme.transitions.create('transform', {
             duration: theme.transitions.duration.shortest,
         }),
+
     },
     expandOpen: {
         transform: 'rotate(180deg)',
     },
     avatar: {
-        backgroundColor: red[500],
+        backgroundColor: blue[600],
     },
     icons: {
         margin: 'auto'
