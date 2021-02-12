@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: 345,
         cursor: 'pointer',
         borderRadius: '25px',
-        height: '55vh'
+        height: '56.25%'
     },
     media: {
         height: 0,
