@@ -17,12 +17,15 @@ import { useHistory } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+
   },
   menuButton: {
     marginRight: theme.spacing(2),
+
   },
   title: {
     flexGrow: 1,
+    cursor: 'pointer',
   },
 }));
 
@@ -61,10 +64,10 @@ export default function Navbar() {
     <>
       {token ? (<div className={classes.root}>
         <AppBar position="static">
-          <Toolbar>
+          <Toolbar >
             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             </IconButton>
-            <Typography variant="h6" className={classes.title}>
+            <Typography onClick={() => history.push('/blog')} variant="h6" className={classes.title}>
               Sahin's Blog
             </Typography>
             {auth && (
@@ -112,34 +115,6 @@ export default function Navbar() {
             </Typography>
               {auth && (
                 <div>
-                  {/* <IconButton
-                    aria-label="account of current user"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                    onClick={handleMenu}
-                    color="inherit"
-                  >
-                    {currentuser.username}
-                    <AccountCircle />
-                  </IconButton>
-                  <Menu
-                    id="menu-appbar"
-                    anchorEl={anchorEl}
-                    anchorOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    open={open}
-                    onClose={handleClose}
-                  >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={handleClose}>My account</MenuItem>
-                  </Menu> */}
                   <h3 onClick={() => history.push('/signin')}  >Login</h3>
                 </div>
               )}
