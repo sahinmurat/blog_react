@@ -117,27 +117,3 @@ function Detail() {
 }
 
 export default Detail
-
-{/* <form className='form' noValidate>
-        <input
-          onChange={(e) => setcontent(e.target.value)}
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="content"
-          label="Your Comment"
-          name="content"
-          autoComplete="content"
-          autoFocus
-        />
-        <button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          onClick={handleSubmit}
-        >
-          Send Your Comment
-        </button>
-      </form> */}

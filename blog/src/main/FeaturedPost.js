@@ -8,6 +8,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles({
   card: {
@@ -24,6 +25,8 @@ const useStyles = makeStyles({
 function FeaturedPost(props) {
   const classes = useStyles();
   const { post } = props;
+  const history = useHistory();
+  const slug = post.slug
 
   return (
     <Grid item xs={12} md={6}>
@@ -40,7 +43,7 @@ function FeaturedPost(props) {
               <Typography variant="subtitle1" paragraph>
                 {post.description}
               </Typography>
-              <Typography variant="subtitle1" color="primary">
+              <Typography onClick={() => history.push(`/detail/${slug}`)} variant="subtitle1" color="primary">
                 Continue reading...
               </Typography>
             </CardContent>
