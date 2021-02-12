@@ -1,29 +1,30 @@
-import React, { useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Card from '../Card/Card'
 import './CategoryStyle.css'
 
 function Main() {
-    const {category} = useParams();
+    const { category } = useParams();
     const [res, setRes] = useState('')
     const [culture, set] = useState('')
     const [literature, setLiterature] = useState([]);
+    const upperCategory = category.charAt(0).toUpperCase() + category.slice(1)
 
     useEffect(async () => {
         const response = await axios.get('https://sahinblog.herokuapp.com/list')
-            .then(
-                (res) => getList(res.data.results)
-            )
-            .catch(
-                (err) => console.error(err)
-            )
+        getList(response.data.results)
+        // .then(
+        //     (res) => getList(res.data.results)
+        // )
+        // .catch(
+        //     (err) => console.error(err)
+        // )
     }, [])
 
     const getList = async (data) => {
         const list = [];
-        console.log('data', data)
-        await data.map((neu) => neu.category == 'Literature' ? list.push(neu) : null)
+        data.map((neu) => neu.category == `${upperCategory}` ? list.push(neu) : null)
         setLiterature(list)
     }
 
