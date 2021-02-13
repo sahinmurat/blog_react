@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import React, { useContext } from 'react';
 import Navbar from '../components/Navbar'
+import Navbr from '../components/Navbr'
 import Footer from '../components/Footer'
 import Signin from "../pages/Signin";
 import Signup from "../pages/Signup"
@@ -15,6 +16,7 @@ function AppRouter() {
     return (
         <Router>
             <Navbar />
+            {/* <Navbr /> */}
             <Switch>
                 <Route exact path='/detail/:slug' component={currentuser ? Detail : Signin} />
                 <Route exact path='/blog' component={Blog} />
