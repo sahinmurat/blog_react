@@ -14,6 +14,14 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { AuthContext } from '../App'
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import PostAddTwoToneIcon from '@material-ui/icons/PostAddTwoTone';
+import MailIcon from '@material-ui/icons/Mail';
+import SendRoundedIcon from '@material-ui/icons/SendRounded';
 
 function Copyright() {
   return (
@@ -57,6 +65,14 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  formControl: {
+    margin: '10px 0',
+    // margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
 }));
 
 export default function PostCreate() {
@@ -67,12 +83,19 @@ export default function PostCreate() {
   const [category, setcategory] = useState('')
   const [status, setStatus] = useState('')
   const { token, setToken, currentuser, setCurrentuser } = useContext(AuthContext);
-  console.log('token', token, 'currentuser', currentuser)
+
+
+  const handleChangeCategory = (event) => {
+    setcategory(event.target.value)
+  };
+  const handleChangeStatus = (event) => {
+    setStatus(event.target.value)
+  };
 
 
   const handleSubmit = () => {
     axios.post('https://sahinblog.herokuapp.com/create', {
-      title: title, content: content, image: image, category: category, status:status
+      title: title, content: content, image: image, category: category, status: status
     }, {
       headers: {
         'Authorization': `Token ${token}`
@@ -89,7 +112,7 @@ export default function PostCreate() {
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
+            <  MailIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Create New Post
@@ -108,6 +131,7 @@ export default function PostCreate() {
               autoFocus
             />
             <TextField
+            rows={5} multiline
               onChange={(e) => setcontent(e.target.value)}
               variant="outlined"
               margin="normal"
@@ -131,27 +155,43 @@ export default function PostCreate() {
               id="image"
               autoComplete="current-image"
             />
-            <TextField
-              onChange={(e) => setcategory(e.target.value)}
-              variant="outlined"
-              required
-              fullWidth
-              name="category"
-              label="Category"
-              type="dropdown"
-              autoComplete="current-image"
-            />
-            <TextField
-              onChange={(e) => setStatus(e.target.value)}
-              variant="outlined"
-              required
-              fullWidth
-              name="status"
-              label="Status"
-              type="dropdown"
-              autoComplete="current-image"
-            />
+            <FormControl variant="outlined" className={classes.formControl} fullWidth>
+              <InputLabel required id="demo-simple-select-outlined-label">Category</InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                value={category}
+                onChange={handleChangeCategory}
+                label="Category"
+                fullWidth
+              >
+                <MenuItem value='Technology'>Technology</MenuItem>
+                <MenuItem value='Travel'>Travel</MenuItem>
+                <MenuItem value='Social'>Social</MenuItem>
+                <MenuItem value='Sport'>Sport</MenuItem>
+                <MenuItem value='Politic'>Politic</MenuItem>
+                <MenuItem value='Philosophy'>Philosophy</MenuItem>
+                <MenuItem value='Literature'>Literature</MenuItem>
+                <MenuItem value='Education'>Education</MenuItem>
+                <MenuItem value='Economy'>Economy</MenuItem>
+                <MenuItem value='Other'>Other</MenuItem>
+              </Select>
+            </FormControl>
 
+            <FormControl variant="outlined" className={classes.formControl} fullWidth>
+              <InputLabel required id="demo-simple-select-outlined-label">Status</InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                value={status}
+                onChange={handleChangeStatus}
+                label="Status"
+                fullWidth
+              >
+                <MenuItem value='Published'>Published</MenuItem>
+                <MenuItem value='Draft'>Draft</MenuItem>
+              </Select>
+            </FormControl>
             <Button
               // type="submit"
               fullWidth
@@ -160,10 +200,9 @@ export default function PostCreate() {
               className={classes.submit}
               onClick={handleSubmit}
             >
-              Send Your Post
+              Send Your Post <SendRoundedIcon style={{ marginLeft:'10px' }}/>
             </Button>
             <Grid container justify="flex-end">
-
             </Grid>
             <Box mt={5}>
               <Copyright />
