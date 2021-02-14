@@ -11,6 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Button, Icon } from '@material-ui/core';
 import DeleteTwoToneIcon from '@material-ui/icons/DeleteTwoTone';
 import Swal from 'sweetalert2'
+import BuildTwoToneIcon from '@material-ui/icons/BuildTwoTone';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -118,8 +119,13 @@ function Detail() {
       })
 
   }
+
+  const updatePost = () => {
+    history.push(`/update/${slug}`)
+  }
+  
   const com = detail.comments
-  console.log('com', com)
+
   return (
     <div className='wrapper'>
       <h2 className='header' > {detail.title} </h2>
@@ -135,6 +141,9 @@ function Detail() {
         </Button>
         <Button onClick={deletePost} variant="contained" color="secondary">
           Delete This Post <DeleteTwoToneIcon style={{ marginLeft: '10px' }} />
+        </Button>
+        <Button onClick={updatePost} variant="contained" style={{ color: 'purple' }}>
+          Update This Post <BuildTwoToneIcon style={{ marginLeft: '10px' }} />
         </Button>
         <h3 className={classes.commentTitle}> What do the people think about this post ?</h3>
         {com?.map(({ content, author }) => <p className={classes.comment}> <b> {author} :</b> <br />{content} </p>)}
