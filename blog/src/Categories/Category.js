@@ -14,13 +14,7 @@ function Main() {
     useEffect(async () => {
         const response = await axios.get('https://sahinblog.herokuapp.com/list')
         getList(response.data.results)
-        // .then(
-        //     (res) => getList(res.data.results)
-        // )
-        // .catch(
-        //     (err) => console.error(err)
-        // )
-    }, [])
+       }, [])
 
     const getList = async (data) => {
         const list = [];

@@ -8,7 +8,6 @@ export const AuthContext = createContext();
 function App(props) {
 
   const session_token = localStorage.getItem('localToken');
-  // const session_user = localStorage.getItem('localCurrentuser');
   const [token, setToken] = useState(session_token);
   const [currentuser, setCurrentuser] = useState(null);
 
@@ -20,13 +19,11 @@ function App(props) {
     }).
       then((res) => {
         setCurrentuser(res.data);
-        // localStorage.setItem('localCurrentuser', res.data);
-        // console.log( localStorage.getItem('localCurrentuser'))
       }).
       catch((err) => console.log(err))
   }, [token])
 
-  
+
   console.log('currentuser appjs', currentuser)
   console.log('token appjs', token)
 

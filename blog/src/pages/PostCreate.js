@@ -131,7 +131,7 @@ export default function PostCreate() {
               autoFocus
             />
             <TextField
-            rows={5} multiline
+              rows={5} multiline
               onChange={(e) => setcontent(e.target.value)}
               variant="outlined"
               margin="normal"
@@ -200,7 +200,7 @@ export default function PostCreate() {
               className={classes.submit}
               onClick={handleSubmit}
             >
-              Send Your Post <SendRoundedIcon style={{ marginLeft:'10px' }}/>
+              Send Your Post <SendRoundedIcon style={{ marginLeft: '10px' }} />
             </Button>
             <Grid container justify="flex-end">
             </Grid>

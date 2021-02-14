@@ -7,6 +7,7 @@ import Signin from "../pages/Signin";
 import Signup from "../pages/Signup"
 import Blog from "../main/Blog";
 import PostCreate from "../pages/PostCreate";
+import PostUpdate from "../pages/PostUpdate";
 import Detail from "../Card/Detail";
 import Category from '../Categories/Category'
 import { AuthContext } from '../App'
@@ -19,6 +20,7 @@ function AppRouter() {
             {/* <Navbr /> */}
             <Switch>
                 <Route exact path='/detail/:slug' component={currentuser ? Detail : Signin} />
+                <Route exact path='/update/:slug' component={PostUpdate} />
                 <Route exact path='/blog' component={Blog} />
                 <Route exact path='/blog/:category' component={Category} />
                 <Route exact path='/signin' component={Signin} />

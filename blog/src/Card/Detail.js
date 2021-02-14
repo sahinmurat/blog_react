@@ -6,9 +6,12 @@ import './Detail.style.css'
 import { FcLike } from "react-icons/fc"
 import { FaRegHeart } from "react-icons/fa"
 import { useHistory } from 'react-router-dom';
-
+import SendRoundedIcon from '@material-ui/icons/SendRounded';
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Button, Icon } from '@material-ui/core';
+import DeleteTwoToneIcon from '@material-ui/icons/DeleteTwoTone';
+import Swal from 'sweetalert2'
+import BuildTwoToneIcon from '@material-ui/icons/BuildTwoTone';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,10 +20,25 @@ const useStyles = makeStyles((theme) => ({
       width: '50%',
     },
   },
+  comment: {
+    // margin: 'auto',
+    border: '1px solid blue',
+    borderRadius: '10px',
+    display: 'inline-block',
+    wordBreak: 'break-all'
+  },
+  commentTitle: {
+    margin: 'auto',
+    marginTop: '20px',
+    marginBottom: '20px'
+  },
+  a: {
+    display: 'inline-block',
+    wordBreak: 'break-all'
+
+  },
+
 }));
-
-
-
 
 function Detail() {
   const classes = useStyles();
@@ -87,13 +105,27 @@ function Detail() {
     ).then((a) => {
       console.log(a)
       history.push(`/blog/${detail.category}`)
-
-
     })
-      .catch((a) => console.log(a))
+      .catch((a) => {
+        Swal.fire({
+          title: 'You are not the owner of this post!',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        })
+      })
+
   }
+
+  const updatePost = () => {
+    history.push(`/update/${slug}`)
+  }
+  
   const com = detail.comments
-  console.log('com', com)
+
   return (
     <div className='wrapper'>
       <h2 className='header' > {detail.title} </h2>
@@ -101,16 +133,20 @@ function Detail() {
       <p className='content' > {detail.content} </p>
       <p className='author' ><b>  Author of this Post: </b> {detail.author} </p>
       {detail.has_liked == true ? <p className='like' onClick={likeHandle} style={{ cursor: 'pointer' }} > I like this Post <FcLike /> </p> : <p className='like' onClick={likeHandle} style={{ cursor: 'pointer' }} > I like this Post <FaRegHeart /> </p>}
-      {com?.map(({ content, author }) => <p className='comment'> {content} ,<b> by {author}</b> </p>)}
 
       <form className={classes.root} noValidate autoComplete="off">
-        <TextField id="outlined-textarea" label="Outlined" variant="outlined" rows={5} multiline onChange={(e) => setcontent(e.target.value)} />
+        <TextField id="outlined-textarea" label="Comment" variant="outlined" rows={5} multiline onChange={(e) => setcontent(e.target.value)} />
         <Button onClick={handleSubmit} variant="contained" color="primary">
-          Primary
+          Submit Your Comment <SendRoundedIcon style={{ marginLeft: '10px' }} />
         </Button>
         <Button onClick={deletePost} variant="contained" color="secondary">
-          Delete This Post
-      </Button>
+          Delete This Post <DeleteTwoToneIcon style={{ marginLeft: '10px' }} />
+        </Button>
+        <Button onClick={updatePost} variant="contained" style={{ color: 'purple' }}>
+          Update This Post <BuildTwoToneIcon style={{ marginLeft: '10px' }} />
+        </Button>
+        <h3 className={classes.commentTitle}> What do the people think about this post ?</h3>
+        {com?.map(({ content, author }) => <p className={classes.comment}> <b> {author} :</b> <br />{content} </p>)}
       </form>
     </div>
   )
