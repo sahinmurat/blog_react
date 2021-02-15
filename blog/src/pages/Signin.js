@@ -15,14 +15,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../App'
-import {useParams} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Sahin's Blog
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Signin(props) {
-  const {slug} = useParams();
+  const { slug } = useParams();
   const classes = useStyles();
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -73,11 +73,10 @@ export default function Signin(props) {
   const { token, setToken, currentuser, setCurrentuser } = useContext(AuthContext);
 
   const handleSubmit = async () => {
-   await axios.post('https://sahinblog.herokuapp.com/auth/login/', { username, email, password })
+    await axios.post('https://sahinblog.herokuapp.com/auth/login/', { username, email, password })
       .then((e) => {
         setToken(e.data.key);
         localStorage.setItem('localToken', e?.data?.key);
-        slug ? console.log('slug', slug) :  console.log('yok')
         slug ? history.push(`${slug}/`) : history.push('/blog')
       })
       .catch((e) => console.log(e))
@@ -155,8 +154,8 @@ export default function Signin(props) {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="signup/" variant="body2">
+                  Don't have an account? Sign Up
                 </Link>
               </Grid>
             </Grid>
