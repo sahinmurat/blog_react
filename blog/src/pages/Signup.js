@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,13 +13,14 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Sahin's Blog
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -64,15 +65,19 @@ export default function Up() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [password2, setPassword2] = useState('')
+  const history = useHistory();
 
   const handleSubmit = () => {
     axios.post('https://sahinblog.herokuapp.com/user/register', {
-      username:username , email:email, password:password, password2:password2
-    }).then((a)=> console.log(a))
-    .catch((a)=> console.log(a))
+      username: username, email: email, password: password, password2: password2
+    }).then((a) => {
+      console.log(a)
+      history.push('/signin')
+    })
+      .catch((a) => console.log(a))
   }
   return (
-    
+
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
@@ -86,7 +91,7 @@ export default function Up() {
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
-              onChange = {(e)=> setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
               variant="outlined"
               margin="normal"
               required
@@ -98,7 +103,7 @@ export default function Up() {
               autoFocus
             />
             <TextField
-              onChange = {(e)=> setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               variant="outlined"
               margin="normal"
               required
@@ -110,7 +115,7 @@ export default function Up() {
               autoFocus
             />
             <TextField
-              onChange = {(e)=> setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               variant="outlined"
               margin="normal"
               required
@@ -121,19 +126,19 @@ export default function Up() {
               id="password"
               autoComplete="current-password"
             />
-             <TextField
-                 onChange = {(e)=> setPassword2(e.target.value)}
-                variant="outlined"
-                required
-                fullWidth
-                name="password2"
-                label="Password Repeat"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-         
-             <Grid item xs={12}>
+            <TextField
+              onChange={(e) => setPassword2(e.target.value)}
+              variant="outlined"
+              required
+              fullWidth
+              name="password2"
+              label="Password Repeat"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+
+            <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I want to receive inspiration, marketing promotions and updates via email."
@@ -145,17 +150,17 @@ export default function Up() {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick = {handleSubmit}
+              onClick={handleSubmit}
             >
               Sign Up
             </Button>
-             <Grid container justify="flex-end">
-            <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
+            <Grid container justify="flex-end">
+              <Grid item>
+                <Link href="signin/" variant="body2">
+                  Already have an account? Sign in
               </Link>
+              </Grid>
             </Grid>
-          </Grid>
             <Box mt={5}>
               <Copyright />
             </Box>
