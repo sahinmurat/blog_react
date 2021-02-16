@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   comment: {
-    // margin: 'auto',
     border: '1px solid blue',
     borderRadius: '10px',
     display: 'inline-block',
@@ -35,9 +34,7 @@ const useStyles = makeStyles((theme) => ({
   a: {
     display: 'inline-block',
     wordBreak: 'break-all'
-
   },
-
 }));
 
 function Detail() {
@@ -61,7 +58,7 @@ function Detail() {
     ).then((a) => setDetail(a.data))
       .catch((a) => console.log(a))
   }, [force])
-  console.log('detail', detail)
+  
 
   const handleSubmit = () => {
     axios.post(`https://sahinblog.herokuapp.com/${slug}/detail-comment`, {

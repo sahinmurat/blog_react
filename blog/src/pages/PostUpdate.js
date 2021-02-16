@@ -233,11 +233,6 @@ export default function PostUpdate() {
                         >
                             Update Your Post <SendRoundedIcon style={{ marginLeft: '10px' }} />
                         </Button>
-                        <Grid container justify="flex-end">
-                        </Grid>
-                        <Box mt={5}>
-                            <Copyright />
-                        </Box>
                     </form>
                 </div>
             </Grid>
