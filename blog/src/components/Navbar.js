@@ -9,18 +9,14 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { AuthContext } from '../App'
-import axios from 'axios'
 import { useHistory } from 'react-router-dom';
 import clsx from 'clsx';
 import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import HomeTwoToneIcon from '@material-ui/icons/HomeTwoTone';
 import PostAddTwoToneIcon from '@material-ui/icons/PostAddTwoTone';
 import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone';
@@ -71,7 +67,7 @@ export default function Navbar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        <ListItem button key='Home Page' onClick={() => history.push('/blog')}>
+        <ListItem button key='Home Page' onClick={() => history.push('/')}>
           <ListItemIcon> <HomeTwoToneIcon style={{ color: 'blue' }} /> </ListItemIcon>
           <ListItemText primary='Home Page' />
         </ListItem> <Divider />
@@ -95,7 +91,7 @@ export default function Navbar() {
     localStorage.removeItem('localToken');
     setToken(null);
     setCurrentuser(null);
-    history.push('/blog');
+    history.push('/');
   }
 
   const [auth, setAuth] = React.useState(true);
@@ -129,7 +125,7 @@ export default function Navbar() {
                 </Drawer>
               </React.Fragment>
             </div>
-            <Typography onClick={() => history.push('/blog')} variant="h6" className={classes.title}>
+            <Typography onClick={() => history.push('/')} variant="h6" className={classes.title}>
               Sahin's Blog
             </Typography>
             {auth && (

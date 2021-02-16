@@ -1,6 +1,7 @@
 .wrapper {
     text-align: center;
-    margin: 15px;
+    padding: 15px;
+    background-color: rgb(230, 247, 255);
     
 }
 .header{
@@ -27,7 +28,4 @@
 .like{
     font-size: large;
 }
-/* .comment{
-    font-size: large;
-    border: 1px dotted rgb(22, 22, 179);
-} */
+

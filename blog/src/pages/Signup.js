@@ -156,14 +156,11 @@ export default function Up() {
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="signin/" variant="body2">
+                <Link onClick={() => history.push('/signin')} variant="body2">
                   Already have an account? Sign in
               </Link>
               </Grid>
             </Grid>
-            <Box mt={5}>
-              <Copyright />
-            </Box>
           </form>
         </div>
       </Grid>

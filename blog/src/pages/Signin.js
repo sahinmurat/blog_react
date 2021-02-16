@@ -77,7 +77,7 @@ export default function Signin(props) {
       .then((e) => {
         setToken(e.data.key);
         localStorage.setItem('localToken', e?.data?.key);
-        slug ? history.push(`${slug}/`) : history.push('/blog')
+        slug ? history.push(`${slug}/`) : history.push('/')
       })
       .catch((e) => console.log(e))
   }
@@ -154,14 +154,11 @@ export default function Signin(props) {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="signup/" variant="body2">
-                  Don't have an account? Sign Up
-                </Link>
+              <Link onClick={() => history.push('/signup')} variant="body2">
+                Don't have an account? Sign Up
+              </Link>
               </Grid>
             </Grid>
-            <Box mt={5}>
-              <Copyright />
-            </Box>
           </form>
         </div>
       </Grid>
