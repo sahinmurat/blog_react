@@ -22,6 +22,7 @@ import Select from '@material-ui/core/Select';
 import PostAddTwoToneIcon from '@material-ui/icons/PostAddTwoTone';
 import MailIcon from '@material-ui/icons/Mail';
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
+import { useHistory } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -77,6 +78,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PostCreate() {
   const classes = useStyles();
+  const history = useHistory();
   const [title, settitle] = useState('')
   const [content, setcontent] = useState('')
   const [image, setimage] = useState('')
@@ -101,7 +103,10 @@ export default function PostCreate() {
         'Authorization': `Token ${token}`
       }
     }
-    ).then((a) => console.log(a))
+    ).then((a) =>{ 
+      console.log(a)
+      history.push('/')
+    })
       .catch((a) => console.log(a))
   }
   return (

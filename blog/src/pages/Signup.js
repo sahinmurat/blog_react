@@ -66,16 +66,19 @@ export default function Up() {
   const [password, setPassword] = useState('')
   const [password2, setPassword2] = useState('')
   const history = useHistory();
+ 
 
+  var  newusername = username.replace(" ", "")
   const handleSubmit = () => {
     axios.post('https://sahinblog.herokuapp.com/user/register', {
-      username: username, email: email, password: password, password2: password2
+      username: newusername, email: email, password: password, password2: password2
     }).then((a) => {
       console.log(a)
       history.push('/signin')
     })
       .catch((a) => console.log(a))
   }
+  console.log(newusername)
   return (
 
     <Grid container component="main" className={classes.root}>
